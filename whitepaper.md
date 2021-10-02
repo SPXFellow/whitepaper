@@ -47,23 +47,25 @@ SPXDesign 背后的设计旨在遵循以下原则：
 
 接下来，本文就将阐述如何将这些构成要素翻译为 BBCode。请注意，官网的前端样式是在不停地更新的，因此本文只介绍转换方法，而不会介绍 html 标签到 BBCode 的转换方案。
 
+
+
 ## III. 文章的起始部分
 
-文章的起始部分包含了：题图、文章分类、大标题、副标题。在 SPXDesign 中，除了复现这些内，还应当注意论坛背景图片的使用（若论坛不支持则可忽略）。
+文章的起始部分包含了：题图、文章分类、大标题、副标题。在 SPXDesign 中，除了复现这些内，还应当注意论坛背景图片的使用，使其尽可能契合官网的背景底色 `#F8F5F4`（若论坛不支持则可忽略）。
 
-* 在 BBCode 中，首先使用 `postbg` 标签，添加对 `bg3.png` 的使用。
+* 在 BBCode 中，首先使用 `postbg` 标签，添加对 `bg3.png` 的使用（仅限我的世界中文论坛）。
 
 * 使用 `align` 标签创建居中的域，并依次添加以下内容：
-  * 题图，并限定尺寸为 `965 x 412`。
-  * 文章分类，背景色为 `Black`，字体颜色为 `White`，加粗，文本全大写。题图和文章分类之间间隔一行。
+  * 题图，使用 `img` 标签引用原图链接，并限定尺寸为 `965 x 412`。
+  * 文章分类，背景颜色为 `Black`，字体颜色为 `White`，加粗，文本全大写。题图和文章分类之间间隔一行。
   * 大标题原文，字号为 `6`，字体颜色为 `Silver`，加粗，文本全大写。大标题原文和文章分类间隔一行。
   * 大标题译文，字号为 `6`，加粗。
-  * 副标题原文，字号为 `2`，字体颜色为 `Silver`，加粗。副标题原文和大标题译文间隔一行。
+  * 副标题原文，字号为 `4`，字体颜色为 `Silver`，加粗。副标题原文和大标题译文间隔一行。
   * 副标题译文，字号为 `4`，加粗。
 
 
 
-以 [Taking Inventory: Candle](https://www.minecraft.net/en-us/article/taking-inventory--candle) 为例，转换的 BBCode 方案应该是：
+以 [Taking Inventory: Candle](https://www.minecraft.net/en-us/article/taking-inventory--candle) 为例，BBCode 转换方案应该是：
 
 ```
 [postbg]bg3.png[/postbg][align=center][img=965,412]https://www.minecraft.net/content/dam/games/minecraft/screenshots/candle-header.jpg[/img]
@@ -73,7 +75,7 @@ SPXDesign 背后的设计旨在遵循以下原则：
 [size=6][b][color=Silver]TAKING INVENTORY: CANDLE[/color][/b][/size]
 [size=6][b]背包盘点：蜡烛[/b][/size]
 
-[size=2][b][color=Silver]A wick-edly good source of light[/color][/b][/size]
+[size=4][b][color=Silver]A wick-edly good source of light[/color][/b][/size]
 [size=4][b]副标题译文[/b][/size][/align]
 ```
 
@@ -89,9 +91,11 @@ SPXDesign 背后的设计旨在遵循以下原则：
 
 原文和译文之间不留间隔行，两个段落间间隔一行。
 
+段落文本的排版适用于各种位置的文本，如果没有特别声明，默认按本方法处理。
 
 
-以 [Taking Inventory: Candle](https://www.minecraft.net/en-us/article/taking-inventory--candle) 的两段为例，转换的 BBCode 方案应该是：
+
+以 [Taking Inventory: Candle](https://www.minecraft.net/en-us/article/taking-inventory--candle) 为例，BBCode 转换方案应该是：
 
 ```
 [indent][indent][size=2][color=Silver]Candles are easy to make. Combine some string (for the wick) and some honeycomb (for the wax) in a crafting grid, and voila – one candle is yours. Plop it down and er... it’ll just sit there unlit. You’ll need to light it with a flint and steel, fire charge, or persuade a friendly ghast to shoot a fireball at it (not recommended). [/color][/size]
@@ -110,12 +114,13 @@ SPXDesign 背后的设计旨在遵循以下原则：
 * 加粗：在原文和译文中使用 `b` 标签包围加粗文本。
 * 斜体：在原文和译文中使用 `i` 标签包围斜体文本。
 * 链接：原文中直接用 `url` 标签（文本颜色应该是默认的 `Silver`），译文中先使用 `url` 标签，然后使用 `color` 标签将链接文本改为颜色`#388d40`。
+* 代码：在原文和译文中均使用以下样式：背景颜色为 `#f1edec`，字体为 `SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace`。译文额外添加字体颜色为 `#7824c5`。
 
 这些特殊格式会在各种地方出现，如果没有特别声明，均按照本方法处理。
 
 
 
-以 [Taking Inventory: Candle](https://www.minecraft.net/en-us/article/taking-inventory--candle) 的两段为例，关于链接的转换的 BBCode 方案应该是：
+以 [Taking Inventory: Candle](https://www.minecraft.net/en-us/article/taking-inventory--candle) 为例，关于链接的 BBCode 转换方案应该是：
 
 ```
 [size=2][color=Silver]For a very long time in Minecraft, there were only a handful of sources of light. There were the Sun and Moon (obviously), lava, fire, the humble [url=https://www.minecraft.net/article/taking-inventory-torch.html][color=Silver]torch[/color][/url], the Nether’s radiant [url=https://www.minecraft.net/article/block-week-glowstone.html][color=Silver]glowstone[/color][/url], and the creepy [url=https://www.minecraft.net/article/block-week--jack-o-lantern.html][color=Silver]jack o’lantern[/color][/url] .[/color][/size]
@@ -126,15 +131,153 @@ SPXDesign 背后的设计旨在遵循以下原则：
 
 
 
-## ？. 针对新闻类帖子的特殊处理
+以 [Minecraft Snapshot 21w39a](https://www.minecraft.net/en-us/article/minecraft-snapshot-21w39a) 为例，关于代码的 BBCode 转换方案应该是：
+
+```
+[backcolor=#f1edec][color=Silver][font=SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace]minecraft/textures/gui/container/inventory.png[/font][/color][/backcolor] now contains an extra sprite for a thin-layout version of the effect list in the inventory
+[backcolor=#f1edec][color=#7824c5][font=SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace]minecraft/textures/gui/container/inventory.png[/font][/color][/backcolor]真必或率数每上直儿定般他非决道气识，作然满这约斗感维询求权C民芦茎。
+```
 
 
 
-## ？. 关于自动化工具的建议
+## ?. 文章内部的标题
+
+文章内部有时会使用标题，这些标题在 html 代码中以 `h1`, `h2`, `h3` 等呈现，对应一级标题、二级标题、三级标题等。
+
+对于标题，假设当前的标题级数为 `x`，则需要将其字号修改为 `7 - x`，并加粗。其余样式均按段落文本的方式实现。
+
+标题应该与上方和下方的内容间隔一行。然而，如果标题紧跟着另一个标题，那么它们直接只留一个空行。
 
 
 
-## 
+以 [Minecraft Snapshot 21w39a](https://www.minecraft.net/en-us/article/minecraft-snapshot-21w39a) 为例，BBCode 转换方案应该是：
+
+```
+[size=5][b][color=Silver]Loot Tables[/color][/b][/size]
+[size=5][b]Loot Tables[/b][/size]
+
+[size=4][b][color=Silver]New functions[/color][/b][/size]
+[size=4][b]New functions[/b][/size]
+
+[size=3][b][color=Silver]set_potion[/color][/b][/size]
+[size=3][b]set_potion[/b][/size]
+
+[size=2][color=Silver]Sets Potion tag on any item[/color][/size]
+Sets Potion tag on any item
+
+[size=2][b][color=Silver]Parameters:[/color][/b][/size]
+[size=2][b]Parameters:[/b][/size]
+
+[list]
+[*][color=Silver]id - potion id[/color]
+[*]id - potion id
+[/list]
+```
+
+注意，在原文中这里有代码样式，这里为了简洁没有添加进来。
+
+
+
+## ?. 有序列表和无序列表
+
+对于无序列表，使用 `list` 标签来创建原生的 BBCode 无序列表。对于每一个列表项，都需要分出原文和译文。原文和译文各占一个列表项，其余样式采用默认方法。
+
+对于有序列表，由于保留原文会影响到有序列表的计数，因此采用无序列表+添加计数文本的方式来实现有序列表。其余格式与无序列表相同。
+
+
+
+以 [Minecraft Snapshot 21w39a](https://www.minecraft.net/en-us/article/minecraft-snapshot-21w39a) 为例，关于无序列表的 BBCode 转换方案应该是：
+
+```
+[size=3][b][color=Silver]ride_entity_in_lava[/color][/b][/size]
+[size=3][b]ride_entity_in_lava[/b][/size]
+
+[list]
+[*][color=Silver]Triggered for every tick when player rides in lava[/color]
+[*]当玩家在岩浆中骑乘时，每刻都会触发
+[*][color=Silver]Conditions[/color]
+[*]条件
+[list]
+[*][color=Silver]player - a player for which this trigger runs[/color]
+[*]player - 触发此触发器的玩家
+[*][color=Silver]start_position - position where riding started (first tick on lava)[/color]
+[*]start_position - 骑乘开始时的位置（处于岩浆中的第一刻）
+[*][color=Silver]distance - predicate for distance between start_position and player[/color]
+[*]distance - 记录start_position和玩家之间距离的谓词
+[/list]
+[/list]
+```
+
+假设该列表是有序列表，则对应的转换方案应该是：
+
+```
+[size=3][b][color=Silver]ride_entity_in_lava[/color][/b][/size]
+[size=3][b]ride_entity_in_lava[/b][/size]
+
+[list]
+[*][color=Silver]1. Triggered for every tick when player rides in lava[/color]
+[*]1. 当玩家在岩浆中骑乘时，每刻都会触发
+[*][color=Silver]2. Conditions[/color]
+[*]2. 条件
+[list]
+[*][color=Silver]1. player - a player for which this trigger runs[/color]
+[*]1. player - 触发此触发器的玩家
+[*][color=Silver]2. start_position - position where riding started (first tick on lava)[/color]
+[*]2. start_position - 骑乘开始时的位置（处于岩浆中的第一刻）
+[*][color=Silver]3. distance - predicate for distance between start_position and player[/color]
+[*]3. distance - 记录start_position和玩家之间距离的谓词
+[/list]
+[/list]
+```
+
+
+
+## ?. 图片
+
+图片分为单图和多图。注意，无论单图还是多图，均不使用 `indent` 缩进。
+
+对于单图，按以下方式进行处理：
+
+* 使用 `align` 标签创建居中的域，并依次添加以下内容：
+  * 图片，使用 `img` 标签引用原图链接，不限定尺寸。
+  * 图片描述原文和译文，加粗，其余采用默认样式。
+
+对于多图，按以下方式处理：
+
+* 若论坛支持 `album` 标签，则：
+  * 使用 `album` 标签创建幻灯片域，并使用 `[aimg=<图片链接>]<描述文本>[/aimg]` 添加一张图片。
+  * 描述文本按单图方式排版。注意，我的世界中文论坛在幻灯片实现上有问题，建议描述文本中只添加不带样式的译文，且没有图片描述时添加一个空格进行占位。
+* 若论坛不支持任何多图机制，则以单图方式将多图依次排列下来。
+
+如果选择更换图片（如汉化了图片中的文本），直接修改 `img` 指向新图片链接，或更换为论坛图片附件格式。
+
+
+
+样例：TODO
+
+## ?. 普通引用和块引用
+
+
+
+## ?. 按钮与表格
+
+按钮与表格曾在过往博文中出现过，但是次数极为稀少。因此，本文不对这些元素进行专门的设计要求。
+
+如果文章中出现了表格，本文建议使用 `table` 标签进行排版。如果文章中出现了按钮，本文建议对原网页审查元素，修改按钮文本后进行截图，并结合 `url` 标签实现跳转。
+
+
+
+## ?. 文章的结束部分
+
+
+
+## ?. 针对新闻类帖子的特殊处理
+
+
+
+## ?. 关于自动化工具的建议
+
+
 
 
 
